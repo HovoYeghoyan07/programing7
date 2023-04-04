@@ -2,7 +2,7 @@ let LivingCreature = require("./LivingCreature")
 module.exports = class GrassEater extends LivingCreature {
     constructor(x, y) {
         super(x,y)
-        this.energy = 18;
+        this.energy = 13;
         this.multiply = 0
         this.directions = [];
 

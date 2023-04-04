@@ -73,6 +73,20 @@ function setup() {
 //     }
 }
 
+socket.on("Winter", function (data) {
+    weather = data;
+})
+socket.on("Summer", function (data) {
+    weather = data;
+})
+socket.on("Autumn", function (data) {
+    weather = data;
+})
+socket.on("Summer", function (data) {
+    weather = data;
+})
+
+
 function changeColors(matrix) {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -97,9 +111,43 @@ function changeColors(matrix) {
             else if(matrix[y][x] == 5){
                 fill("brown")
             }
+            else if(matrix[y][x] == 6){
+                fill("black")
+            }
+            if (matrix[y][x] == 1) {
+                if (weather == "spring") {
+                    fill("green");
+                }
+                else if (weath == "summer") {
+                    fill("yellow");
+                }
+                else if (weath == "autumn") {
+                    fill("orange");
+                }
+                if (weath == "winter") {
+                    fill("white");
+                }
+            }
             
             rect(x * side, y * side, side, side);
         }
+    }
+    socket.on('send matrix', changeColors);
+
+    function Winter() {
+        socket.emit("winter");
+    }
+    function Summer() {
+        socket.emit("summer");
+    }
+    function Spring() {
+        socket.emit("spring");
+    }
+    function Autumn() {
+        socket.emit("autumn");
+    }
+    function Killall(){
+        socket.emit("killAll");
     }
 
 
@@ -124,4 +172,3 @@ function changeColors(matrix) {
 
 
 }
-socket.on("send matrix",changeColors)
