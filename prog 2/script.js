@@ -40,6 +40,7 @@
 
 let side = 20;
 const socket = io()
+var  weath = "autumn" 
 // let matrix = generator(15, 25, 5,10,4);
 // let grassArr = []
 // let grassEaterArr = []
@@ -49,7 +50,7 @@ const socket = io()
 function setup() {
     createCanvas(30* side, 30 * side);
     background('#acacac');
-    frameRate(5)
+}
 //     for (var y = 0; y < matrix.length; y++) {
 //         for (var x = 0; x < matrix[y].length; x++) {
 //             if (matrix[y][x] == 1) {
@@ -71,19 +72,22 @@ function setup() {
 
 //         }
 //     }
-}
+
+
+
+
 
 socket.on("Winter", function (data) {
-    weather = data;
+    weath = data;
 })
 socket.on("Summer", function (data) {
-    weather = data;
+    weath = data;
 })
 socket.on("Autumn", function (data) {
-    weather = data;
+    weath = data;
 })
 socket.on("Summer", function (data) {
-    weather = data;
+    weath = data;
 })
 
 

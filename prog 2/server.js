@@ -152,31 +152,31 @@ setInterval(gameMove,500)
 var weather;
 
 function Winter() {
-    weath = "winter";
-    io.sockets.emit('Winter', weather);
+    weather = "winter";
+    io.sockets.emit('Winter', weath);
 }
 
 function Summer() {
-    weath = "summer";
-    io.sockets.emit('Summer', weather);
+    weather = "summer";
+    io.sockets.emit('Summer', weath);
 }
 
 function Spring() {
-    weath = "spring";
-    io.sockets.emit('Spring', weather);
+    weather = "spring";
+    io.sockets.emit('Spring', weath);
 }
 function Autumn() {
-    weath = "autumn";
-    io.sockets.emit('Autumn', weather);
+    weather = "autumn";
+    io.sockets.emit('Autumn', weath);
 }
 
 function  Killall () {
     grassArr = [];
     grassEaterArr = [];
-    gishatichner = [];
-    hrashagorcarr = [];
-    xotabuysarr = [];
-    vorsordarr = [];
+    humArr = [];
+    predatorArr= [];
+    mushroomArr = [];
+    dinoArr = [];
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             matrix[y][x] = 0;
@@ -195,12 +195,12 @@ io.on('connection', function (socket) {
 })
 var statistics = {};
 setInterval(function () {
-    statistics.grass = grassArr.length;
-    statistics.grassEater = grassEaterArr.length;
-    statistics.gishatich = predatorArr.length;
-    statistics.vorsord = humArr.length;
-    statistics.hrashagorc = mushroomArr.length;
-    statistics.xotabuys = dinoArr.length;
+    statistics.Grass = grassArr.length;
+    statistics.GrassEater = grassEaterArr.length;
+    statistics.Predator = predatorArr.length;
+    statistics.Hum = humArr.length;
+    statistics.Mushroom = mushroomArr.length;
+    statistics.Dino = dinoArr.length;
     fs.writeFile("statistics.json", JSON.stringify(statistics), function () {
     })
 }, 1000);
