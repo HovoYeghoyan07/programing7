@@ -40,7 +40,7 @@
 
 let side = 20;
 const socket = io()
-var  weath = "autumn" 
+
 // let matrix = generator(15, 25, 5,10,4);
 // let grassArr = []
 // let grassEaterArr = []
@@ -83,17 +83,31 @@ socket.on("Winter", function (data) {
 socket.on("Summer", function (data) {
     weath = data;
 })
+socket.on("Spring", function (data) {
+    weath = data;
+})
 socket.on("Autumn", function (data) {
     weath = data;
 })
-socket.on("Summer", function (data) {
-    weath = data;
-})
 
-
+var  weath = "autumn" 
 function changeColors(matrix) {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 1) {
+                if (weather == "spring") {
+                    fill("green");
+                }
+                else if (weath == "summer") {
+                    fill("yellow");
+                }
+                else if (weath == "autumn") {
+                    fill("orange");
+                }
+                if (weath == "winter") {
+                    fill("white");
+                }
+            }
 
             if (matrix[y][x] == 1) {
                 fill("green");
@@ -118,25 +132,15 @@ function changeColors(matrix) {
             else if(matrix[y][x] == 6){
                 fill("black")
             }
-            if (matrix[y][x] == 1) {
-                if (weather == "spring") {
-                    fill("green");
-                }
-                else if (weath == "summer") {
-                    fill("yellow");
-                }
-                else if (weath == "autumn") {
-                    fill("orange");
-                }
-                if (weath == "winter") {
-                    fill("white");
-                }
-            }
+            
+            
             
             rect(x * side, y * side, side, side);
         }
     }
-    socket.on('send matrix', changeColors);
+}
+socket.on('send matrix', changeColors);
+
 
     function Winter() {
         socket.emit("winter");
@@ -150,7 +154,7 @@ function changeColors(matrix) {
     function Autumn() {
         socket.emit("autumn");
     }
-    function Killall(){
+    function Kill(){
         socket.emit("killAll");
     }
 
@@ -175,4 +179,5 @@ function changeColors(matrix) {
 
 
 
-}
+
+

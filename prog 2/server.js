@@ -3,7 +3,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var fs = require("fs");
-const { kill } = require('process');
+ var { Kill } = require('process');
 
 
 
@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
 res.redirect('index.html');
 });
 
-server.listen(3000);
+server.listen(3001);
 
 
 function generator(matLen, gr, grEat,pred,hum,mush,dino) {
@@ -68,7 +68,7 @@ function generator(matLen, gr, grEat,pred,hum,mush,dino) {
     io.emit("send matrix",matrix)
     return matrix;
 }
-matrix = generator(15, 25, 20,10,4,22,5);
+matrix = generator(15, 28, 20,10,4,22,5);
 grassArr = []
 grassEaterArr = []
 predatorArr = []
@@ -149,32 +149,32 @@ io.emit("send matrix",matrix)
 }
 setInterval(gameMove,500)
 
-var weather;
+var weath;
 
 function Winter() {
-    weather = "winter";
+    weath = "winter";
     io.sockets.emit('Winter', weath);
 }
 
 function Summer() {
-    weather = "summer";
+    weath = "summer";
     io.sockets.emit('Summer', weath);
 }
 
 function Spring() {
-    weather = "spring";
+    weath = "spring";
     io.sockets.emit('Spring', weath);
 }
 function Autumn() {
-    weather = "autumn";
+    weath = "autumn";
     io.sockets.emit('Autumn', weath);
 }
 
-function  Killall () {
+function Kill() {
     grassArr = [];
     grassEaterArr = [];
+    predatorArr = [];
     humArr = [];
-    predatorArr= [];
     mushroomArr = [];
     dinoArr = [];
     for (var y = 0; y < matrix.length; y++) {
@@ -190,7 +190,7 @@ io.on('connection', function (socket) {
     socket.on("summer", Summer);
     socket.on("autumn", Autumn);
     socket.on("winter", Winter);
-    socket.on("killAll", Killall );
+    socket.on("killAll", Kill );
     
 })
 var statistics = {};
