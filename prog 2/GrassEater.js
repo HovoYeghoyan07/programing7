@@ -20,7 +20,7 @@ module.exports = class GrassEater extends LivingCreature {
         var emptyCells = this.chooseCell(0);
         var newCell = emptyCells[Math.floor(Math.random()*emptyCells.length)];
         // console.log(emptyCells);
-        if (newCell && this.multiply >= 20) {
+        if (newCell && this.multiply >= 16) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = 2;

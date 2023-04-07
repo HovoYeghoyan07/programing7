@@ -3,7 +3,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var fs = require("fs");
- var { Kill } = require('process');
+
 
 
 
@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
 res.redirect('index.html');
 });
 
-server.listen(3001);
+server.listen(3000);
 
 
 function generator(matLen, gr, grEat,pred,hum,mush,dino) {
@@ -68,19 +68,22 @@ function generator(matLen, gr, grEat,pred,hum,mush,dino) {
     io.emit("send matrix",matrix)
     return matrix;
 }
-matrix = generator(15, 28, 20,10,4,22,5);
+
+matrix = generator(30, 28, 20,10,4,22,5);
 grassArr = []
 grassEaterArr = []
 predatorArr = []
 humArr = []
 mushroomArr = []
 dinoArr = []
+
 const Grass = require('./Grass')
 const GrassEater = require('./GrassEater')
 const Predator = require('./Predator')
 const Hum = require('./Hum')
 const Mushroom = require('./Mushroom')
 const Dino = require('./Dino')
+
 function creatObject(){
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -111,6 +114,7 @@ function creatObject(){
     
         }
     }
+    io.sockets.emit('send matrix', matrix)
     
 }
 creatObject()
@@ -149,28 +153,28 @@ io.emit("send matrix",matrix)
 }
 setInterval(gameMove,500)
 
-var weath;
+var weather;
 
 function Winter() {
-    weath = "winter";
-    io.sockets.emit('Winter', weath);
+    weather = 'Winter';
+    io.emit('Winter', weather);
 }
 
 function Summer() {
-    weath = "summer";
-    io.sockets.emit('Summer', weath);
+    weather = 'Summer';
+    io.emit('Summer', weather);
 }
 
 function Spring() {
-    weath = "spring";
-    io.sockets.emit('Spring', weath);
+    weather = 'Spring';
+    io.emit('Spring', weather);
 }
 function Autumn() {
-    weath = "autumn";
-    io.sockets.emit('Autumn', weath);
+    weather = 'Autumn';
+    io.emit('Autumn', weather);
 }
 
-function Kill() {
+function killall() {
     grassArr = [];
     grassEaterArr = [];
     predatorArr = [];
@@ -182,15 +186,16 @@ function Kill() {
             matrix[y][x] = 0;
         }
     }
-    io.sockets.emit("send matrix", matrix);
+    io.emit("send matrix", matrix);
 }
+
 io.on('connection', function (socket) {
     creatObject()
-    socket.on("spring", Spring);
-    socket.on("summer", Summer);
-    socket.on("autumn", Autumn);
-    socket.on("winter", Winter);
-    socket.on("killAll", Kill );
+    socket.on('Spring', Spring);
+    socket.on('Summer', Summer);
+    socket.on('Autumn', Autumn);
+    socket.on('Winter', Winter);
+    socket.on("killAll",killall);
     
 })
 var statistics = {};

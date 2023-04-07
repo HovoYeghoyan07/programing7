@@ -19,7 +19,7 @@ mul() {
     var newCell = emptyCells[Math.floor(Math.random()*emptyCells.length)];
 
     // console.log(emptyCells);
-    if (newCell && this.multiply >= 22) {
+    if (newCell && this.multiply >= 19) {
         var newX = newCell[0];
         var newY = newCell[1];
         matrix[newY][newX] = 3;
